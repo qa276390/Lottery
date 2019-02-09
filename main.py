@@ -68,7 +68,7 @@ def train(opts):
     model.add(Activation('relu'))
 
     #model.add(MaxPooling2D(pool_size=(2,2), strides=None, padding='same'))
-    model.add(AveragePooling2D(pool_size=(2,2), strides=0, padding='same'))
+    model.add(AveragePooling2D(pool_size=(2,2), strides=None, padding='same'))
     model.add(Dropout(dprate))
 
     model.add(Conv2D(64, (3, 3)))
@@ -78,7 +78,7 @@ def train(opts):
     model.add(BatchNormalization())
     model.add(Activation('relu'))
     #model.add(MaxPooling2D(pool_size=(2,2), strides=None, padding='same'))
-    model.add(AveragePooling2D(pool_size=(2,2), strides=0, padding='same'))
+    model.add(AveragePooling2D(pool_size=(2,2), strides=None, padding='same'))
     model.add(Dropout(dprate))
 
 
@@ -89,7 +89,7 @@ def train(opts):
     model.add(BatchNormalization())
     model.add(Activation('relu'))
     #model.add(MaxPooling2D(pool_size=(2,2), strides=None, padding='same'))
-    model.add(AveragePooling2D(pool_size=(2,2), strides=0, padding='same'))
+    model.add(AveragePooling2D(pool_size=(2,2), strides=None, padding='same'))
     #model.add(GlobalMaxPooling1D())
     #model.add(GlobalAveragePooling1D())
 
