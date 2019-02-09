@@ -36,7 +36,7 @@ def train(opts):
         os.mkdir(FOLDER)
     MODEL_PATH = FOLDER + '/model.h5'
     FIG_PATH = FOLDER + '/history.png'
-    #FIG_PATH_N = FOLDER + '/Confusion_Matrix_Norm.png'
+    FIG_PATH_N = FOLDER + '/visualize.png'
     nclass = 39
     print(os.getpid())
 
@@ -68,7 +68,7 @@ def train(opts):
     model.add(Activation('relu'))
 
     #model.add(MaxPooling2D(pool_size=(2,2), strides=None, padding='same'))
-    model.add(AveragePooling2D(pool_size=(2,2), strides=0, padding='same'))
+    model.add(AveragePooling2D(pool_size=(2,2), strides=None, padding='same'))
     model.add(Dropout(dprate))
 
     model.add(Conv2D(64, (3, 3)))
@@ -78,7 +78,7 @@ def train(opts):
     model.add(BatchNormalization())
     model.add(Activation('relu'))
     #model.add(MaxPooling2D(pool_size=(2,2), strides=None, padding='same'))
-    model.add(AveragePooling2D(pool_size=(2,2), strides=0, padding='same'))
+    model.add(AveragePooling2D(pool_size=(2,2), strides=None, padding='same'))
     model.add(Dropout(dprate))
 
 
@@ -89,7 +89,7 @@ def train(opts):
     model.add(BatchNormalization())
     model.add(Activation('relu'))
     #model.add(MaxPooling2D(pool_size=(2,2), strides=None, padding='same'))
-    model.add(AveragePooling2D(pool_size=(2,2), strides=0, padding='same'))
+    model.add(AveragePooling2D(pool_size=(2,2), strides=None, padding='same'))
     #model.add(GlobalMaxPooling1D())
     #model.add(GlobalAveragePooling1D())
 
@@ -118,7 +118,7 @@ def train(opts):
 
     def imgshow(img):
         plt.imshow(np.reshape(img, (np.shape(img)[0], np.shape(img)[1])))
-        plt.show()
+        plt.savefig(FIG_PATH_N)
 
 
     # In[6]:
@@ -172,7 +172,7 @@ def train(opts):
     print(np.shape(y_train))
 
     #print(np.shape(X_train[0]))
-    #imgshow(X_test[-1])
+    imgshow(X_test[-1])
     #print(y_test[-1])
     #imgshow(X_train[-1])
     #print(y_train[-1])
@@ -288,6 +288,10 @@ def test(opts):
     print(x.shape)
     y = model.predict(x)
     print(y)
+    
+    Y = pd.DataFrame(y)
+    Y_PATH = os.path.join(FOLDER,'y_predict.csv')
+    Y.to_csv(Y_PATH, index=False)
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Training')
